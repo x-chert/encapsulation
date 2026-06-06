@@ -1,5 +1,6 @@
 {
 	"name": "xchert/encapsulation",
+	"type": "library",
 	"description": "A simple way to accommodate, exchange and structorize data with objects",
 	"keywords": [
 		"object",
@@ -7,11 +8,10 @@
 		"data-exchange",
 		"array"
 	],
-	"authors": [
-		{
-			"name": "Dustin Simon"
-		}
-	],
+	"license": "MIT",
+	"authors": [{
+		"name": "Dustin Simon"
+	}],
 	"autoload": {
 		"psr-4": {
 			"Xchert\\Encapsulation\\": "src/"
