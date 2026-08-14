@@ -1,17 +1,24 @@
 {
 	"name": "xchert/encapsulation",
-	"type": "library",
-	"description": "A simple way to accommodate, exchange and structorize data with objects",
+	"description": "A library for data encapsulation and collections",
 	"keywords": [
-		"object",
 		"encapsulation",
-		"data-exchange",
-		"array"
+		"data objects",
+		"collections",
+		"container",
+		"properties",
+		"immutability"
 	],
+	"type": "library",
 	"license": "MIT",
 	"authors": [{
 		"name": "Dustin Simon"
 	}],
+	"support": {
+		"issues": "https://github.com/x-chert/encapsulation/issues",
+		"source": "https://github.com/x-chert/encapsulation"
+	},
+	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
 			"Xchert\\Encapsulation\\": "src/"
