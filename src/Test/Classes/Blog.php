@@ -1,6 +1,6 @@
 <?php
 
-namespace Xchert\Encapsulation\Test;
+namespace Xchert\Encapsulation\Test\Classes;
 
 use Xchert\Encapsulation\MutableContainer;
 use Xchert\Encapsulation\PropertyEncapsulation;
