@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Xchert\Encapsulation\Exception\CannotUnsetException;
 use Xchert\Encapsulation\Exception\PropertyNotExistsException;
 use Xchert\Encapsulation\MutableContainer;
+use Xchert\Encapsulation\Test\Classes\Blog;
 
 class PropertyEncapsulationTest extends TestCase
 {
@@ -89,7 +90,7 @@ class PropertyEncapsulationTest extends TestCase
 
     public function testCannotUnset(): void
     {
-        $encapsulation = new Blog([
+        $encapsulation = new \Xchert\Encapsulation\Test\Classes\Blog([
             'title' => 'Superfoods',
             'author' => 'John Doe'
         ]);

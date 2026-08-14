@@ -4,6 +4,9 @@ namespace Xchert\Encapsulation\Test;
 
 use PHPUnit\Framework\TestCase;
 use Xchert\Encapsulation\Exception\PropertyNotExistsException;
+use Xchert\Encapsulation\Test\Classes\MovieNight;
+use Xchert\Encapsulation\Test\Classes\PrivateBarbequeParty;
+use Xchert\Encapsulation\Test\Classes\PrivateParty;
 
 class EncapsulatedPropertiesTest extends TestCase
 {
