@@ -11,9 +11,11 @@
 	],
 	"type": "library",
 	"license": "MIT",
-	"authors": [{
-		"name": "Dustin Simon"
-	}],
+	"authors": [
+		{
+			"name": "Dustin Simon"
+		}
+	],
 	"support": {
 		"issues": "https://github.com/x-chert/encapsulation/issues",
 		"source": "https://github.com/x-chert/encapsulation"
@@ -30,5 +32,10 @@
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^13.2"
+	},
+	"archive": {
+		"exclude": [
+			"/.github"
+		]
 	}
 }
