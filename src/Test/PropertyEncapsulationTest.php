@@ -90,7 +90,7 @@ class PropertyEncapsulationTest extends TestCase
 
     public function testCannotUnset(): void
     {
-        $encapsulation = new \Xchert\Encapsulation\Test\Classes\Blog([
+        $encapsulation = new Blog([
             'title' => 'Superfoods',
             'author' => 'John Doe'
         ]);
@@ -165,7 +165,7 @@ class PropertyEncapsulationTest extends TestCase
         $encapsulation = new Blog(['title' => 'Superfoods', 'author' => 'John Doe']);
         $data = [];
 
-        foreach($encapsulation as $field => $value) {
+        foreach ($encapsulation as $field => $value) {
             $data[$field] = $value;
         }
 

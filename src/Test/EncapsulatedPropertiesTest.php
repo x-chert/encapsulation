@@ -67,7 +67,7 @@ class EncapsulatedPropertiesTest extends TestCase
 
         $result = [];
 
-        foreach($encapsulation as $key => $value) {
+        foreach ($encapsulation as $key => $value) {
             $result[$key] = $value;
         }
 

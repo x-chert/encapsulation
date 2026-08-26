@@ -19,7 +19,7 @@ class Container implements \Countable, \IteratorAggregate, \JsonSerializable
     {
         $elements = [];
 
-        foreach($containers as $container) {
+        foreach ($containers as $container) {
             $elements = \array_merge($elements, $container->toArray());
         }
 
@@ -95,9 +95,9 @@ class Container implements \Countable, \IteratorAggregate, \JsonSerializable
 
     public function sort(?callable $callable = null, bool $direction = self::ASCENDING, int $flags = SORT_REGULAR): self
     {
-        if($callable !== null) {
+        if ($callable !== null) {
             \usort($this->elements, $callable);
-        } elseif($direction) {
+        } elseif ($direction) {
             \sort($this->elements, $flags);
         } else {
             \rsort($this->elements, $flags);
@@ -125,7 +125,7 @@ class Container implements \Countable, \IteratorAggregate, \JsonSerializable
 
     protected function add(mixed ...$elements): self
     {
-        foreach($elements as $element) {
+        foreach ($elements as $element) {
             $this->validateType($element);
             $this->elements[] = $element;
         }
@@ -142,11 +142,11 @@ class Container implements \Countable, \IteratorAggregate, \JsonSerializable
     {
         $class = $this->getAllowedClass();
 
-        if($class === null) {
+        if ($class === null) {
             return;
         }
 
-        if(!$element instanceof $class) {
+        if (!$element instanceof $class) {
             throw new \InvalidArgumentException(\sprintf('%s can only hold %s. Got %s', \get_class($this), $class, \get_debug_type($element)));
         }
     }

@@ -15,12 +15,12 @@ trait ArrayTrait
 
     public function has(string $field): bool
     {
-        return array_key_exists($field, $this->data);
+        return \array_key_exists($field, $this->data);
     }
 
     public function getFields(): array
     {
-        return array_keys($this->data);
+        return \array_keys($this->data);
     }
 
     public function isFieldAllowed(string $field): bool
@@ -33,7 +33,7 @@ trait ArrayTrait
      */
     private function _set(string $field, mixed $value): void
     {
-        if(!$this->isFieldAllowed($field)) {
+        if (!$this->isFieldAllowed($field)) {
             throw new NotAllowedFieldException($field, $this);
         }
 

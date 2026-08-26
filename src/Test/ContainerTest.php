@@ -129,7 +129,7 @@ class ContainerTest extends TestCase
         $container = new Container([1, 2, 3, 4, 5]);
         $data = [];
 
-        foreach($container as $item) {
+        foreach ($container as $item) {
             $data[] = $item;
         }
 

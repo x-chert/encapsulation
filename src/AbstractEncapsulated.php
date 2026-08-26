@@ -4,13 +4,14 @@ namespace Xchert\Encapsulation;
 
 abstract class AbstractEncapsulated implements Encapsulated
 {
+    /** @param array<string, mixed> $data */
     abstract public function __construct(array $data = []);
 
     public function getList(array $fields): array
     {
         $result = [];
 
-        foreach($fields as $fieldName) {
+        foreach ($fields as $fieldName) {
             $result[$fieldName] = $this->get($fieldName);
         }
 

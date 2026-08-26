@@ -15,8 +15,8 @@ abstract class AbstractEncapsulation extends AbstractEncapsulated implements Enc
 
     public function setList(array $data): void
     {
-        foreach($data as $field => $value) {
-            $this->set((string) $field, $value);
+        foreach ($data as $field => $value) {
+            $this->set((string)$field, $value);
         }
     }
 
@@ -25,7 +25,7 @@ abstract class AbstractEncapsulation extends AbstractEncapsulated implements Enc
      */
     public function add(string $field, mixed $value): void
     {
-        if(!$this->has($field)) {
+        if (!$this->has($field)) {
             $this->set($field, [$value]);
 
             return;
@@ -33,12 +33,12 @@ abstract class AbstractEncapsulation extends AbstractEncapsulated implements Enc
 
         $item = $this->get($field);
 
-        if(\is_array($item)) {
+        if (\is_array($item)) {
             $item[] = $value;
             $this->set($field, $item);
 
             return;
-        } elseif($item instanceof MutableContainer) {
+        } elseif ($item instanceof MutableContainer) {
             $item->add($value);
 
             return;
@@ -52,33 +52,33 @@ abstract class AbstractEncapsulation extends AbstractEncapsulated implements Enc
      */
     public function addList(string $field, array $values): void
     {
-        foreach($values as $value) {
+        foreach ($values as $value) {
             $this->add($field, $value);
         }
     }
 
     public function offsetExists(mixed $offset): bool
     {
-        return $this->has((string) $offset);
+        return $this->has((string)$offset);
     }
 
     public function offsetGet(mixed $offset): mixed
     {
-        return $this->get((string) $offset);
+        return $this->get((string)$offset);
     }
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if(is_null($offset)) {
+        if (\is_null($offset)) {
             throw new \RuntimeException('Cannot set a value to an Encapsulation without offset.');
         }
 
-        $this->set((string) $offset, $value);
+        $this->set((string)$offset, $value);
     }
 
     public function offsetUnset(mixed $offset): void
     {
-        $this->unset((string) $offset);
+        $this->unset((string)$offset);
     }
 
     public function __set(string $name, mixed $value): void

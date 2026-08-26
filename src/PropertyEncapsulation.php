@@ -38,15 +38,15 @@ abstract class PropertyEncapsulation extends AbstractEncapsulation
         $reflectionObject = new \ReflectionObject($this);
         $property = Reflection::getProperty($reflectionObject, $field);
 
-        if($property === null) {
+        if ($property === null) {
             throw new PropertyNotExistsException($this, $field);
         }
 
-        if(!$property->isInitialized($this)) {
+        if (!$property->isInitialized($this)) {
             return;
         }
 
-        if($property->hasType() && !$property->getType()->allowsNull()) {
+        if ($property->hasType() && !$property->getType()->allowsNull()) {
             throw new CannotUnsetException($this, $field);
         }
 
@@ -62,12 +62,12 @@ abstract class PropertyEncapsulation extends AbstractEncapsulation
         $reflectionObject = new \ReflectionObject($this);
         $adderMethod = Reflection::getMethod($reflectionObject, \sprintf('add%s', \ucfirst($field)));
 
-        if($adderMethod !== null) {
+        if ($adderMethod !== null) {
             try {
                 $adderMethod->invoke($this, $value);
 
                 return;
-            } catch(\ReflectionException $e) {
+            } catch (\ReflectionException $e) {
                 // Do nothing. Will continue with property access
             }
         }
@@ -75,10 +75,10 @@ abstract class PropertyEncapsulation extends AbstractEncapsulation
         $currentValue = $this->_get($field, $reflectionObject);
         $currentValue = $this->_add($currentValue, $value, $field);
 
-        if(\is_array($currentValue)) {
+        if (\is_array($currentValue)) {
             try {
                 $this->_set($field, $currentValue, $reflectionObject);
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 throw NotAddableException::becauseOf($e, $field, $this);
             }
         }
@@ -94,28 +94,28 @@ abstract class PropertyEncapsulation extends AbstractEncapsulation
 
         $adderMethod = Reflection::getMethod($reflectionObject, \sprintf('add%s', \ucfirst($field)));
 
-        if($adderMethod !== null) {
+        if ($adderMethod !== null) {
             try {
-                foreach($values as $value) {
+                foreach ($values as $value) {
                     $adderMethod->invoke($this, $value);
                 }
 
                 return;
-            } catch(\ReflectionException $e) {
+            } catch (\ReflectionException $e) {
                 // Do nothing. Will continue with property access
             }
         }
 
         $currentValue = $this->_get($field, $reflectionObject);
 
-        foreach($values as $value) {
+        foreach ($values as $value) {
             $currentValue = $this->_add($currentValue, $value, $field);
         }
 
-        if(\is_array($currentValue)) {
+        if (\is_array($currentValue)) {
             try {
                 $this->_set($field, $currentValue, $reflectionObject);
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 throw NotAddableException::becauseOf($e, $field, $this);
             }
         }
@@ -126,20 +126,20 @@ abstract class PropertyEncapsulation extends AbstractEncapsulation
      */
     private function _add(mixed $currentValue, mixed $value, string $field): array|MutableContainer
     {
-        if($currentValue === null) {
+        if ($currentValue === null) {
             $currentValue = $this->initializeCollection($field);
         }
 
-        if(\is_array($currentValue)) {
+        if (\is_array($currentValue)) {
             $currentValue[] = $value;
 
             return $currentValue;
         }
 
-        if($currentValue instanceof MutableContainer) {
+        if ($currentValue instanceof MutableContainer) {
             try {
                 $currentValue->add($value);
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 throw NotAddableException::becauseOf($e, $field, $this);
             }
 
@@ -153,23 +153,23 @@ abstract class PropertyEncapsulation extends AbstractEncapsulation
     {
         $property = Reflection::getProperty(new \ReflectionObject($this), $field);
 
-        if($property === null) {
+        if ($property === null) {
             return [];
         }
 
-        if(!$property->hasType()) {
+        if (!$property->hasType()) {
             return [];
         }
 
         $type = $property->getType();
 
-        if(!$type instanceof \ReflectionNamedType) {
+        if (!$type instanceof \ReflectionNamedType) {
             return [];
         }
 
         $type = $type->getName();
 
-        if($type === MutableContainer::class || \is_subclass_of($type, MutableContainer::class)) {
+        if ($type === MutableContainer::class || \is_subclass_of($type, MutableContainer::class)) {
             $value = new $type();
             $property->setValue($this, $value);
 

@@ -7,15 +7,15 @@ use Xchert\Encapsulation\PropertyEncapsulation;
 
 class Blog extends PropertyEncapsulation
 {
-	protected string $title;
+    protected string $title;
 
-	protected ?string $author = null;
+    protected ?string $author = null;
 
-	protected array $images;
+    protected array $images;
 
-	protected array $visitors = [];
+    protected array $visitors = [];
 
-	protected MutableContainer $categories;
+    protected MutableContainer $categories;
 
-	protected array $keywords;
+    protected array $keywords;
 }
