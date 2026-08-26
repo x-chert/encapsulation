@@ -24,10 +24,11 @@ trait PropertyTrait
     public function getList(array $fields): array
     {
         $reflectionObject = new \ReflectionObject($this);
+
         $result = [];
 
         /** @var string $field */
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             $result[$field] = $this->_get($field, $reflectionObject);
         }
 
@@ -44,7 +45,7 @@ trait PropertyTrait
         $reflectionObject = new \ReflectionObject($this);
         $result = [];
 
-        foreach(Reflection::getProperties($reflectionObject) as $name => $property) {
+        foreach (Reflection::getProperties($reflectionObject) as $name => $property) {
             $result[$name] = $this->_get($name, $reflectionObject, $property);
         }
 
@@ -60,10 +61,10 @@ trait PropertyTrait
     {
         $reflectionObject = new \ReflectionObject($this);
 
-        foreach(Reflection::getProperties($reflectionObject) as $name => $property) {
+        foreach (Reflection::getProperties($reflectionObject) as $name => $property) {
             $value = $this->_get($name, $reflectionObject, $property);
 
-            if((is_array($value) && !empty($value)) || (!is_array($value) && $value !== null)) {
+            if ((\is_array($value) && !empty($value)) || (!\is_array($value) && $value !== null)) {
                 return false;
             }
         }
@@ -71,36 +72,42 @@ trait PropertyTrait
         return true;
     }
 
+    /**
+     * @throws PropertyNotExistsException
+     */
     private function _setList(array $data): void
     {
         $reflectionObject = new \ReflectionObject($this);
 
-        foreach($data as $field => $value) {
+        foreach ($data as $field => $value) {
             $this->_set($field, $value, $reflectionObject);
         }
     }
 
+    /**
+     * @throws PropertyNotExistsException
+     */
     private function _set(string $field, mixed $value, \ReflectionObject $reflectionObject): void
     {
-        if(Value::isEmpty($field)) {
+        if (Value::isEmpty($field)) {
             throw new PropertyNotExistsException($this, $field);
         }
 
         $setterMethod = Reflection::getMethod($reflectionObject, \sprintf('set%s', \ucfirst($field)));
 
-        if($setterMethod !== null) {
+        if ($setterMethod !== null) {
             try {
                 $setterMethod->invoke($this, $value);
 
                 return;
-            } catch(\ReflectionException $e) {
+            } catch (\ReflectionException $e) {
                 // Do nothing. Will continue with property access
             }
         }
 
         $reflectionProperty = Reflection::getProperty($reflectionObject, $field);
 
-        if($reflectionProperty === null) {
+        if ($reflectionProperty === null) {
             throw new PropertyNotExistsException($this, $field);
         }
 
@@ -112,27 +119,27 @@ trait PropertyTrait
      */
     private function _get(string $field, \ReflectionClass $reflectionObject, ?\ReflectionProperty $reflectionProperty = null): mixed
     {
-        if(Value::isEmpty($field)) {
+        if (Value::isEmpty($field)) {
             throw new PropertyNotExistsException($this, $field);
         }
 
         $getterMethod = Reflection::getMethod($reflectionObject, \sprintf('get%s', \ucfirst($field)));
 
-        if($getterMethod !== null) {
+        if ($getterMethod !== null) {
             try {
                 return $getterMethod->invoke($this);
-            } catch(\ReflectionException $e) {
+            } catch (\ReflectionException $e) {
                 // Do nothing. Will continue with property access
             }
         }
 
         $reflectionProperty = $reflectionProperty ?? Reflection::getProperty($reflectionObject, $field);
 
-        if($reflectionProperty === null) {
+        if ($reflectionProperty === null) {
             throw new PropertyNotExistsException($this, $field);
         }
 
-        if($reflectionProperty->hasType() && !$reflectionProperty->isInitialized($this)) {
+        if ($reflectionProperty->hasType() && !$reflectionProperty->isInitialized($this)) {
             return null;
         }
 
