@@ -1,3 +1,9 @@
+# v1.0.2
+### Other
+
+* [#17 - Moved testsuite](https://github.com/x-chert/encapsulation/pull/17)
+
+
 # v1.0.1
 ### New features
 
