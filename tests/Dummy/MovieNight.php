@@ -1,6 +1,6 @@
 <?php
 
-namespace Xchert\Encapsulation\Test\Classes;
+namespace Xchert\Encapsulation\Test\Dummy;
 
 use Xchert\Encapsulation\EncapsulatedProperties;
 

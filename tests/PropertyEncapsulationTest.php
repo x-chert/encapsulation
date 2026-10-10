@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Xchert\Encapsulation\Exception\CannotUnsetException;
 use Xchert\Encapsulation\Exception\PropertyNotExistsException;
 use Xchert\Encapsulation\MutableContainer;
-use Xchert\Encapsulation\Test\Classes\Blog;
+use Xchert\Encapsulation\Test\Dummy\Blog;
 
 class PropertyEncapsulationTest extends TestCase
 {
