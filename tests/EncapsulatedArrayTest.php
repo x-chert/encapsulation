@@ -5,7 +5,7 @@ namespace Xchert\Encapsulation\Test;
 use PHPUnit\Framework\TestCase;
 use Xchert\Encapsulation\EncapsulatedArray;
 use Xchert\Encapsulation\Exception\NotAllowedFieldException;
-use Xchert\Encapsulation\Test\Classes\Book;
+use Xchert\Encapsulation\Test\Dummy\Book;
 
 class EncapsulatedArrayTest extends TestCase
 {
